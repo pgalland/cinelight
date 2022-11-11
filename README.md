@@ -36,3 +36,5 @@ I update my AWS Lambda with
 ```
 aws lambda update-function-code --cli-connect-timeout 6000 --region eu-west-3 --function-name allocine-light --zip-file fileb://target/allocine-light-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
+
+The entry point for the aws-lambda is the `handleRequest` method in the Java `Handler` class.
