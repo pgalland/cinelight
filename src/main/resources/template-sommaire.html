@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cinélight</title>
+    <style>
+        body {
+            color: white;
+            background-color: black;
+        }
+        a {
+            color: white
+        }
+        li {
+            margin: 10px 0;
+        }
+
+        td {
+            border: 1px solid white;
+            border-collapse: collapse;
+            padding-right: 20px;
+            vertical-align: top;
+        }
+        table {
+            border-collapse: collapse;
+            border: 1px solid white;
+        }
+        th {
+            border-collapse: collapse;
+            border: 1px solid white;
+            text-align: center;
+            font-weight: normal;
+            padding: 5px;
+        }
+        #title {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<p style="text-align: center" id="title">Horaires Cinéma à Paris - {date}</p>
+
+<table>
+    <tbody id="sommaire">
+    <tr>
+        <th><i>Par arrondissement</i></th> <th><i>Rechercher</i></th> <th><i>Top 5 Presse (récents)</i></th> <th><i>Top 5 Spectateurs (récents)</i></th>
+    </tr>
+    <tr>
+        <td rowspan="3">
+            <div class="columnSommaire">
+                <ul>
+                <li><a href="75001.html">1er Arrondissement</a></li>
+                <li><a href="75002.html">2eme Arrondissement</a></li>
+                <li><a href="75003.html">3eme Arrondissement</a></li>
+                <li><a href="75004.html">4eme Arrondissement</a></li>
+                <li><a href="75005.html">5eme Arrondissement</a></li>
+                <li><a href="75006.html">6eme Arrondissement</a></li>
+                <li><a href="75007.html">7eme Arrondissement</a></li>
+                <li><a href="75008.html">8eme Arrondissement</a></li>
+                <li><a href="75009.html">9eme Arrondissement</a></li>
+                <li><a href="75010.html">10eme Arrondissement</a></li>
+                <li><a href="75011.html">11eme Arrondissement</a></li>
+                <li><a href="75012.html">12eme Arrondissement</a></li>
+                <li><a href="75013.html">13eme Arrondissement</a></li>
+                <li><a href="75014.html">14eme Arrondissement</a></li>
+                <li><a href="75015.html">15eme Arrondissement</a></li>
+                <li><a href="75016.html">16eme Arrondissement</a></li>
+                <li><a href="75017.html">17eme Arrondissement</a></li>
+                <li><a href="75018.html">18eme Arrondissement</a></li>
+                <li><a href="75019.html">19eme Arrondissement</a></li>
+                <li><a href="75020.html">20eme Arrondissement</a></li>
+                </ul>
+            </div>
+        </td>
+
+        <td rowspan="3">
+            <div class="columnSommaire">
+                <ul>
+                <li><a href="rechercherFilm.html">Rechercher un film</a></li>
+                <li><a href="rechercherCinema.html">Rechercher un cinéma</a></li>
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div class="columnSommaire">
+                <ol>
+                    <li><a href="top_1_press_recent.html">{top 1 press recent}</a></li>
+                    <li><a href="top_2_press_recent.html">{top 2 press recent}</a></li>
+                    <li><a href="top_3_press_recent.html">{top 3 press recent}</a></li>
+                    <li><a href="top_4_press_recent.html">{top 4 press recent}</a></li>
+                    <li><a href="top_5_press_recent.html">{top 5 press recent}</a></li>
+                </ol>
+            </div>
+        </td>
+        <td>
+            <div class="columnSommaire">
+                <ol>
+                    <li><a href="top_1_spectators_recent.html">{top 1 spectators recent}</a></li>
+                    <li><a href="top_2_spectators_recent.html">{top 2 spectators recent}</a></li>
+                    <li><a href="top_3_spectators_recent.html">{top 3 spectators recent}</a></li>
+                    <li><a href="top_4_spectators_recent.html">{top 4 spectators recent}</a></li>
+                    <li><a href="top_5_spectators_recent.html">{top 5 spectators recent}</a></li>
+                </ol>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th><i>Top 5 Presse (tous)</i></th> <th><i>Top 5 Spectateurs (tous)</i></th>
+    </tr>
+    <tr>
+        <td>
+            <div class="columnSommaire">
+                <ol>
+                    <li><a href="top_1_press_all.html">{top 1 press all}</a></li>
+                    <li><a href="top_2_press_all.html">{top 2 press all}</a></li>
+                    <li><a href="top_3_press_all.html">{top 3 press all}</a></li>
+                    <li><a href="top_4_press_all.html">{top 4 press all}</a></li>
+                    <li><a href="top_5_press_all.html">{top 5 press all}</a></li>
+                </ol>
+            </div>
+        </td>
+        <td>
+            <div class="columnSommaire">
+                <ol>
+                    <li><a href="top_1_spectators_all.html">{top 1 spectators all}</a></li>
+                    <li><a href="top_2_spectators_all.html">{top 2 spectators all}</a></li>
+                    <li><a href="top_3_spectators_all.html">{top 3 spectators all}</a></li>
+                    <li><a href="top_4_spectators_all.html">{top 4 spectators all}</a></li>
+                    <li><a href="top_5_spectators_all.html">{top 5 spectators all}</a></li>
+                </ol>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

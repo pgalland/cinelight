@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{title}</title>
+  <style>
+        body {
+            color: white;
+            background-color: black;
+        }
+        td {
+            border: 1px solid white;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        table, th {
+            border-collapse: collapse;
+            border: 1px solid white;
+        }
+        #searchBar {
+          text-align:center;
+          margin-top: 30px;
+          margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="searchBar">
+  <input type="text"  style="font-size:18pt;" id="searchInput" onkeyup="searchFunction()" placeholder="Rechercher un {recherche} ...">
+</div>
+
+{body}
+
+</body>
+<script>
+function sanitizeText(someText) {
+return someText
+.toLowerCase()
+.replace(/[éèêë]/g,"e")
+.replace(/à/g,"a")
+.replace(/ç/g,"c")
+.replace(/ù/g,"u")
+.replace(/[ïî]/,"i")
+}
+
+function searchFunction() {
+// Declare variables
+var input, filters, filter, timegrids, name, i, k, containsAllFilters;
+input = document.getElementById('searchInput');
+timegrids = document. getElementsByClassName("timegrid");
+filters = sanitizeText(input.value).split(" ");
+
+// Loop through all timegrids, and hide those who don't match the search query
+for (i = 0; i < timegrids.length; i++) {
+name = sanitizeText(timegrids[i].id)
+containsAllFilters = true
+for (k = 0; k < filters.length; k++){
+containsAllFilters = containsAllFilters && (name.indexOf(filters[k]) > -1)
+}
+if (containsAllFilters) {
+timegrids[i].style.display = "";
+} else {
+timegrids[i].style.display = "none";
+}
+}
+}
+</script>
+</html>
