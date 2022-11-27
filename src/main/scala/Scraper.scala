@@ -23,10 +23,13 @@ object Scraper {
         doc.getElementsByClass("card entity-card entity-card-list movie-card-theater cf hred")
       val movieInfo = movies.asScala.map { movie =>
         val title = movie.getElementsByClass("meta-title-link").first.text
-        val screeningTimes = movie
+        val screeningTimes = (movie
           .getElementsByClass("showtimes-hour-item-value")
           .eachText
-          .asScala
+          .asScala ++ movie
+          .getElementsByClass("showtimes-hours-item-value") // The className can have the value "hours" instead of "hour" as well.
+          .eachText
+          .asScala)
           .map(time => LocalTime.parse(time, TimeGrid.timeFormatter))
           .toSeq
 
@@ -72,7 +75,6 @@ object Scraper {
                      pressRating = pressRating,
                      spectatorsRating = spectatorsRating))
       }
-
       Cinema(cinemaName, movieInfo.map(info => info._1 -> info._2).toMap) ->
         movieInfo.toSeq.map(_._3)
     } catch {
@@ -85,20 +87,19 @@ object Scraper {
     val regex = "[A-Z0-9]+"
     val pattern = Pattern.compile(regex)
     Jsoup
-      .connect("https://www.allocine.fr/rechercher/theater/?q=" + postalCode)
+      .connect(s"https://www.allocine.fr/rechercher/theater/?q=$postalCode")
       .get
       .getElementsByClass("add-theater-anchor")
       .asScala
-      .map(e => {
-        // Ressemble à data-theater="{"id":"C0073","name":"Le Champo - Espace Jacques Tati"}"
-        // Il y a des quote etc dedans d'où le unescapeEntities
+      .flatMap { e =>
+        // Looks like data-theater="{"id":"C0073","name":"Le Champo - Espace Jacques Tati"}"
+        // Needs unescapeEntities because of the quotes inside.
         val data = Parser.unescapeEntities(e.attr("data-theater"), true)
-        // hack pour récupérer le code.
+        // TODO: Use json reader instead of this hack.
         data
           .split("\"")
           .find((s: String) => pattern.matcher(s).matches)
-          .get
-      })
+      }
       .filterNot(code => code.equalsIgnoreCase("Z8888")) // Z8888 est un ciné test.
       .map(code => s"https://www.allocine.fr/seance/salle_gen_csalle=$code.html")
       .toSeq
