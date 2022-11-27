@@ -6,6 +6,11 @@ all the movie-theaters programs for the day in Paris, France.
 It is launched  by an AWS Lambda every night. It generates all the HTML files for 
 [cinelight.fr]() and uploads them on the website server.
 
+
+## Requirements
+
+I build with Maven 3.8.6 (but should work with earlier versions) and run on Java 11.
+
 ## Build and Run
 
 Build and package with Maven
