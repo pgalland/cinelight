@@ -6,11 +6,7 @@ import java.time.{LocalDate, ZoneId}
 
 object Runner {
   def main(args: Array[String]): Unit = {
-    os.remove.all(os.pwd / "www")
-    doCinelightLogic(dryRun = {
-      val input = scala.io.StdIn.readLine("Dry run (Y/n) ? ")
-      input.isEmpty || input.toLowerCase == "y"
-    })
+    doCinelightLogic(dryRun = args.nonEmpty && args.head == "--dry-run")
   }
 
   def doCinelightLogic(dryRun: Boolean = false): String = {
