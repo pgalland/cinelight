@@ -39,24 +39,36 @@ object PageHTML {
       .replace("{body}", movieHtml)
   }
 
-  def makeSommairePage(top5PressRecent: Seq[MovieRating],
-                       top5SpectatorsRecent: Seq[MovieRating],
+  def makeSommairePage(top5Press2Weeks: Seq[MovieRating],
+                       top5Spectators2Weeks: Seq[MovieRating],
+                       top5Press1Year: Seq[MovieRating],
+                       top5Spectators1Year: Seq[MovieRating],
                        top5PressAll: Seq[MovieRating],
                        top5SpectatorsAll: Seq[MovieRating],
                        date: LocalDateTime): String = {
     val template = Source.fromResource("template-sommaire.html").mkString
     // format: off
     template
-      .replace("{top 1 press recent}", s"${top5PressRecent(0).title} - (${top5PressRecent(0).pressRating.getOrElse(0.0)})")
-      .replace("{top 2 press recent}", s"${top5PressRecent(1).title} - (${top5PressRecent(1).pressRating.getOrElse(0.0)})")
-      .replace("{top 3 press recent}", s"${top5PressRecent(2).title} - (${top5PressRecent(2).pressRating.getOrElse(0.0)})")
-      .replace("{top 4 press recent}", s"${top5PressRecent(3).title} - (${top5PressRecent(3).pressRating.getOrElse(0.0)})")
-      .replace("{top 5 press recent}", s"${top5PressRecent(4).title} - (${top5PressRecent(4).pressRating.getOrElse(0.0)})")
-      .replace("{top 1 spectators recent}", s"${top5SpectatorsRecent(0).title} - (${top5SpectatorsRecent(0).spectatorsRating.getOrElse(0.0)})")
-      .replace("{top 2 spectators recent}", s"${top5SpectatorsRecent(1).title} - (${top5SpectatorsRecent(1).spectatorsRating.getOrElse(0.0)})")
-      .replace("{top 3 spectators recent}", s"${top5SpectatorsRecent(2).title} - (${top5SpectatorsRecent(2).spectatorsRating.getOrElse(0.0)})")
-      .replace("{top 4 spectators recent}", s"${top5SpectatorsRecent(3).title} - (${top5SpectatorsRecent(3).spectatorsRating.getOrElse(0.0)})")
-      .replace("{top 5 spectators recent}", s"${top5SpectatorsRecent(4).title} - (${top5SpectatorsRecent(4).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 1 press 2weeks}", s"${top5Press2Weeks(0).title} - (${top5Press2Weeks(0).pressRating.getOrElse(0.0)})")
+      .replace("{top 2 press 2weeks}", s"${top5Press2Weeks(1).title} - (${top5Press2Weeks(1).pressRating.getOrElse(0.0)})")
+      .replace("{top 3 press 2weeks}", s"${top5Press2Weeks(2).title} - (${top5Press2Weeks(2).pressRating.getOrElse(0.0)})")
+      .replace("{top 4 press 2weeks}", s"${top5Press2Weeks(3).title} - (${top5Press2Weeks(3).pressRating.getOrElse(0.0)})")
+      .replace("{top 5 press 2weeks}", s"${top5Press2Weeks(4).title} - (${top5Press2Weeks(4).pressRating.getOrElse(0.0)})")
+      .replace("{top 1 spectators 2weeks}", s"${top5Spectators2Weeks(0).title} - (${top5Spectators2Weeks(0).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 2 spectators 2weeks}", s"${top5Spectators2Weeks(1).title} - (${top5Spectators2Weeks(1).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 3 spectators 2weeks}", s"${top5Spectators2Weeks(2).title} - (${top5Spectators2Weeks(2).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 4 spectators 2weeks}", s"${top5Spectators2Weeks(3).title} - (${top5Spectators2Weeks(3).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 5 spectators 2weeks}", s"${top5Spectators2Weeks(4).title} - (${top5Spectators2Weeks(4).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 1 press 1year}", s"${top5Press1Year(0).title} - (${top5Press1Year(0).pressRating.getOrElse(0.0)})")
+      .replace("{top 2 press 1year}", s"${top5Press1Year(1).title} - (${top5Press1Year(1).pressRating.getOrElse(0.0)})")
+      .replace("{top 3 press 1year}", s"${top5Press1Year(2).title} - (${top5Press1Year(2).pressRating.getOrElse(0.0)})")
+      .replace("{top 4 press 1year}", s"${top5Press1Year(3).title} - (${top5Press1Year(3).pressRating.getOrElse(0.0)})")
+      .replace("{top 5 press 1year}", s"${top5Press1Year(4).title} - (${top5Press1Year(4).pressRating.getOrElse(0.0)})")
+      .replace("{top 1 spectators 1year}", s"${top5Spectators1Year(0).title} - (${top5Spectators1Year(0).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 2 spectators 1year}", s"${top5Spectators1Year(1).title} - (${top5Spectators1Year(1).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 3 spectators 1year}", s"${top5Spectators1Year(2).title} - (${top5Spectators1Year(2).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 4 spectators 1year}", s"${top5Spectators1Year(3).title} - (${top5Spectators1Year(3).spectatorsRating.getOrElse(0.0)})")
+      .replace("{top 5 spectators 1year}", s"${top5Spectators1Year(4).title} - (${top5Spectators1Year(4).spectatorsRating.getOrElse(0.0)})")
       .replace("{top 1 press all}", s"${top5PressAll(0).title} - (${top5PressAll(0).pressRating.getOrElse(0.0)})")
       .replace("{top 2 press all}", s"${top5PressAll(1).title} - (${top5PressAll(1).pressRating.getOrElse(0.0)})")
       .replace("{top 3 press all}", s"${top5PressAll(2).title} - (${top5PressAll(2).pressRating.getOrElse(0.0)})")

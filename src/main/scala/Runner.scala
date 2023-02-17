@@ -38,7 +38,29 @@ object Runner {
       })
       .filter(_.hasScreenings)
 
-    val top5PressRecent = movies
+    val top5Press2Weeks = movies
+      .filter(movie =>
+        ratings(movie.title).releaseDate.exists(releaseDate =>
+          releaseDate.isAfter(LocalDate.now().minusWeeks(2))))
+      .sortBy { movie =>
+        val rating = ratings(movie.title)
+        rating.pressRating.getOrElse(0.0) -> rating.spectatorsRating.getOrElse(0.0)
+      }
+      .reverse
+      .take(5)
+    val top5Spectators2Weeks =
+      movies
+        .filter(movie =>
+          ratings(movie.title).releaseDate.exists(releaseDate =>
+            releaseDate.isAfter(LocalDate.now().minusWeeks(2))))
+        .sortBy { movie =>
+          val rating = ratings(movie.title)
+          rating.spectatorsRating.getOrElse(0.0) -> rating.pressRating.getOrElse(0.0)
+        }
+        .reverse
+        .take(5)
+
+    val top5Press1Year = movies
       .filter(movie =>
         ratings(movie.title).releaseDate.exists(releaseDate =>
           releaseDate.isAfter(LocalDate.now().minusYears(1))))
@@ -48,7 +70,7 @@ object Runner {
       }
       .reverse
       .take(5)
-    val top5SpectatorsRecent =
+    val top5Spectators1Year =
       movies
         .filter(movie =>
           ratings(movie.title).releaseDate.exists(releaseDate =>
@@ -78,8 +100,10 @@ object Runner {
 
     val pages = Map(
       "index.html" -> PageHTML.makeSommairePage(
-        top5PressRecent = top5PressRecent.map(movie => ratings(movie.title)),
-        top5SpectatorsRecent = top5SpectatorsRecent.map(movie => ratings(movie.title)),
+        top5Press2Weeks = top5Press2Weeks.map(movie => ratings(movie.title)),
+        top5Spectators2Weeks = top5Spectators2Weeks.map(movie => ratings(movie.title)),
+        top5Press1Year = top5Press1Year.map(movie => ratings(movie.title)),
+        top5Spectators1Year = top5Spectators1Year.map(movie => ratings(movie.title)),
         top5PressAll = top5PressAll.map(movie => ratings(movie.title)),
         top5SpectatorsAll = top5SpectatorsAll.map(movie => ratings(movie.title)),
         date = date
@@ -94,11 +118,19 @@ object Runner {
     // format: off
       ++ (0 to 4)
       .map(topIdx =>
-        s"top_${topIdx + 1}_press_recent.html" -> PageHTML.makeMoviePage(top5PressRecent(topIdx), date))
+        s"top_${topIdx + 1}_press_2weeks.html" -> PageHTML.makeMoviePage(top5Press2Weeks(topIdx), date))
       .toMap
       ++ (0 to 4)
       .map(topIdx =>
-        s"top_${topIdx + 1}_spectators_recent.html" -> PageHTML.makeMoviePage(top5SpectatorsRecent(topIdx), date))
+        s"top_${topIdx + 1}_spectators_2weeks.html" -> PageHTML.makeMoviePage(top5Spectators2Weeks(topIdx), date))
+      .toMap
+      ++ (0 to 4)
+      .map(topIdx =>
+        s"top_${topIdx + 1}_press_1year.html" -> PageHTML.makeMoviePage(top5Press1Year(topIdx), date))
+      .toMap
+      ++ (0 to 4)
+      .map(topIdx =>
+        s"top_${topIdx + 1}_spectators_1year.html" -> PageHTML.makeMoviePage(top5Spectators1Year(topIdx), date))
       .toMap
       ++ (0 to 4)
       .map(topIdx =>
