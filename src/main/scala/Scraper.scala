@@ -18,7 +18,7 @@ object Scraper {
   def scrapeCinemaPage(cinemaURL: String): (Cinema, Seq[MovieRating]) =
     try {
       val doc = Jsoup.connect(cinemaURL).get
-      val cinemaName = doc.getElementsByClass("theater-cover-title").first.text
+      val cinemaName = doc.getElementsByClass("header-theater-title").first.text
       val movies =
         doc.getElementsByClass("card entity-card entity-card-list movie-card-theater cf hred")
       val movieInfo = movies.asScala.map { movie =>
@@ -39,7 +39,7 @@ object Scraper {
                             .getElementsByClass("meta-body-item meta-body-info")
                             .first
                             .text
-                            .split("/")
+                            .split("\\|")
                             .head
                             .strip(),
                           format)).toOption
